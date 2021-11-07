@@ -32,12 +32,13 @@ def long_time_task(name):
     end = time.time()
     print('Task {} runs {time:0.2f} seconds.'.format(name, time=(end - start)))
 
-# if __name__ == '__main__':
-#     print('Parent process {}.'.format(os.getpid()))
-#     p = Pool(9)
-#     for i in range(12):
-#         p.apply_async(long_time_task, args=(i,))
-#     print('Waiting for all subprocesses done...')
-#     p.close()
-#     p.join()
-#     print('All subprocesses done.')
+
+if __name__ == '__main__':
+    print('Parent process {}.'.format(os.getpid()))
+    p = Pool(9)
+    for i in range(12):
+        p.apply_async(long_time_task, args=(i,))
+    print('Waiting for all subprocesses done...')
+    p.close()
+    p.join()
+    print('All subprocesses done.')
