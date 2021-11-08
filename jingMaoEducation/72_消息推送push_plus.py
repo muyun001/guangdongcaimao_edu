@@ -9,7 +9,7 @@ url = "http://pushplus.hxtrip.com/send"
 title = "测试"
 content = "我的兼职猫程序搞定了！！！！！！！！"
 params = {
-    "token": "e71cb823d3564e939a79a06ffc6e9114",
+    "token": "自己在官网注册的token",
     "title": title,
     "content": content,
 }
