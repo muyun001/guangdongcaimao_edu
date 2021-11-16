@@ -1,37 +1,48 @@
-#
+import requests
 import time
 import threading
-import random
+
+urls = [f"https://www.cnblogs.com/#p{i}" for i in range(50)]
 
 
-def print1():
-    for i in range(10):
-        print(i)
-        time.sleep(random.random())
+def crawl(url):
+    response = requests.get(url)
+    print(url, len(response.text))
 
 
-def print2():
-    for i in range(10):
-        print(-i)
-        time.sleep(random.random())
+def single_crawl():
+    """单线程抓取"""
+    print("开始单线程抓取")
+    for url in urls:
+        crawl(url)
+    print("结束单线程抓取")
 
 
-def test1():
-    print1()
-    print2()
+def multi_crawl():
+    """多线程抓取"""
+    print("开始多线程抓取")
+    threads = []
+    for url in urls:
+        threads.append(threading.Thread(target=crawl, args=(url,)))  # 参数必须是元组
 
+    # 把每个线程启动
+    for thread in threads:
+        thread.start()
 
-def test_pool():
-    """线程池测试"""
-    t1 = threading.Thread(target=print1)
-    t2 = threading.Thread(target=print2)
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
-    print("所有线程都执行完毕")
+    # 等待每个线程
+    for thread in threads:
+        thread.join()
+    print("结束多线程抓取")
 
 
 if __name__ == '__main__':
-    # test1()
-    test_pool()
+    start = time.time()
+    single_crawl()
+    end = time.time()
+    print(f"单线程抓取花了{start - end}秒")
+
+    start = time.time()
+    multi_crawl()
+    end = time.time()
+    print(start - end)
+    print(f"多线程抓取花了{start - end}秒")

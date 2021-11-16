@@ -26,11 +26,10 @@ import random
     4、从"未点名名单"中随机点名，点名之后，把此名字从"未点名名单"中删除，并把名字添加到"chosed_students.txt"中
 """
 
-# all_students_path = "./4班所有学生名单.txt"
-# chosed_students_path = "./4班被点名名单.txt"
-
-all_students_path = "./5班所有学生名单.txt"
-chosed_students_path = "./5班被点名名单.txt"
+all_students_path = "./4班所有学生名单.txt"
+chosed_students_path = "./4班被点名名单.txt"
+# all_students_path = "./5班所有学生名单.txt"
+# chosed_students_path = "./5班被点名名单.txt"
 
 # all_students_path = "./all_students.txt"
 # chosed_students_path = "./chosed_students.txt"
