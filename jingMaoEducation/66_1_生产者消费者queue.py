@@ -25,10 +25,14 @@ def parse(html):
 def do_crawl(url_queue: queue.Queue, html_queue: queue.Queue):  # 也可以不指定格式：url_queue, html_queue
     while True:
         url = url_queue.get()
-        print(f"crawl, {url}")
+        print("url_queue size:", url_queue.qsize())
+        # print(f"crawl, {url}")
         html = crawl(url)
         html_queue.put(html)
         time.sleep(random.randint(1, 2))
+
+        if url_queue.empty():
+            break
 
 
 def do_parse(html_queue: queue.Queue, file):
@@ -37,8 +41,9 @@ def do_parse(html_queue: queue.Queue, file):
         results = parse(html)
         for title, url in results.items():
             file.write(f"{title}:{url}\n")
-            print(f"parse, {title}:{url}\n")
+            # print(f"parse, {title}:{url}\n")
 
+        print("html_queue size:", html_queue.qsize())
         time.sleep(random.randint(1, 2))
         # 若列表为空，则退出
         if html_queue.empty():
@@ -48,7 +53,7 @@ def do_parse(html_queue: queue.Queue, file):
 if __name__ == '__main__':
     url_queue = queue.Queue()
     html_queue = queue.Queue()
-    for url in urls:
+    for url in urls[:2 + 1]:
         url_queue.put(url)
 
     # 创建3个生产者线程
