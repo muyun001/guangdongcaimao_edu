@@ -39,10 +39,10 @@ if __name__ == '__main__':
     start = time.time()
     single_crawl()
     end = time.time()
-    print(f"单线程抓取花了{start - end}秒")
+    print(f"单线程抓取花了{end - start}秒")
 
     start = time.time()
     multi_crawl()
     end = time.time()
     print(start - end)
-    print(f"多线程抓取花了{start - end}秒")
+    print(f"多线程抓取花了{end - start}秒")
